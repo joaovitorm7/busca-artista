@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Busca de Artistas - TheAudioDB</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="src/style.css">
+</head>
+
+<body>
+  <div id="app">
+    <header>
+      <h1>Busca de Artistas</h1>
+      <p>
+        Digite o nome de uma banda ou artista e busque informações na API TheAudioDB.
+      </p>
+    </header>
+
+    <main>
+      <form id="search-form">
+        <input id="artist-input" type="text" placeholder="Ex: coldplay" autocomplete="off" />
+        <button type="submit">Buscar</button>
+      </form>
+
+      <p id="status" class="status"></p>
+
+      <section id="results" class="results"></section>
+    </main>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
