@@ -6,7 +6,10 @@ import {
   showError,
   showEmpty,
   renderArtists,
+  renderRecentSearches,
+  onRecentClick,
 } from "./ui.js";
+import { saveSearch, getRecentSearches } from "./storage.js";
 
 async function handleSearch(term) {
   if (!term) {
@@ -22,6 +25,8 @@ async function handleSearch(term) {
       showEmpty();
     } else {
       renderArtists(artists);
+      saveSearch(term);
+      renderRecentSearches(getRecentSearches());
     }
   } catch (error) {
     console.error(error);
@@ -30,3 +35,12 @@ async function handleSearch(term) {
 }
 
 onSearchSubmit(handleSearch);
+renderRecentSearches(getRecentSearches());
+
+onRecentClick((term) => {
+  // opcional: preencher o input visualmente
+  const inputEl = document.querySelector("#artist-input");
+  if (inputEl) inputEl.value = term;
+  // reexecuta a busca
+  handleSearch(term);
+});

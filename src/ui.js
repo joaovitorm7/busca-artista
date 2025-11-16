@@ -2,6 +2,7 @@ const form = document.querySelector("#search-form");
 const input = document.querySelector("#artist-input");
 const resultsContainer = document.querySelector("#results");
 const statusElement = document.querySelector("#status");
+const recentListContainer = document.querySelector("#recent-list");
 
 export function onSearchSubmit(callback) {
   form.addEventListener("submit", (event) => {
@@ -24,6 +25,36 @@ export function showError(message) {
 export function showEmpty() {
   statusElement.textContent = "Nenhum artista encontrado.";
   resultsContainer.innerHTML = "";
+}
+
+export function renderRecentSearches(terms = []) {
+  if (!recentListContainer) return;
+  recentListContainer.innerHTML = "";
+
+  if (!terms || terms.length === 0) {
+    recentListContainer.textContent = "Nenhuma busca recente.";
+    return;
+  }
+
+  terms.forEach((term) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "recent-item";
+    btn.textContent = term;
+    btn.dataset.term = term;
+    recentListContainer.appendChild(btn);
+  });
+}
+
+export function onRecentClick(callback) {
+  if (!recentListContainer) return;
+  recentListContainer.addEventListener("click", (event) => {
+    const target = event.target;
+    if (target && target.matches && target.matches(".recent-item")) {
+      const term = target.dataset.term;
+      if (term) callback(term);
+    }
+  });
 }
 
 export function renderArtists(artists) {
