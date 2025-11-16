@@ -3,6 +3,7 @@ const input = document.querySelector("#artist-input");
 const resultsContainer = document.querySelector("#results");
 const statusElement = document.querySelector("#status");
 const recentListContainer = document.querySelector("#recent-list");
+const clearButton = document.querySelector('#clear-recent');
 
 export function onSearchSubmit(callback) {
   form.addEventListener("submit", (event) => {
@@ -101,4 +102,9 @@ export function renderArtists(artists) {
 
     resultsContainer.appendChild(card);
   });
+}
+
+export function onClearRecent(callback) {
+  if (!clearButton) return;
+  clearButton.addEventListener('click', () => callback());
 }

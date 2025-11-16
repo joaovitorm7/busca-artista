@@ -27,11 +27,8 @@ export function saveSearch(term) {
 
     try {
         const current = getRecentSearches();
-        // Remover ocorrência anterior se existir
         const filtered = current.filter((t) => t.toLowerCase() !== normalized.toLowerCase());
-        // Colocar no começo
         filtered.unshift(normalized);
-        // Limitar o tamanho
         const sliced = filtered.slice(0, MAX_ENTRIES);
         localStorage.setItem(STORAGE_KEY, JSON.stringify(sliced));
     } catch {
@@ -43,6 +40,6 @@ export function clearRecentSearches() {
     try {
         localStorage.removeItem(STORAGE_KEY);
     } catch {
-        // ignore
+
     }
 }

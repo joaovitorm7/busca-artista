@@ -8,8 +8,9 @@ import {
   renderArtists,
   renderRecentSearches,
   onRecentClick,
+  onClearRecent,
 } from "./ui.js";
-import { saveSearch, getRecentSearches } from "./storage.js";
+import { saveSearch, getRecentSearches, clearRecentSearches } from "./storage.js";
 
 async function handleSearch(term) {
   if (!term) {
@@ -38,9 +39,12 @@ onSearchSubmit(handleSearch);
 renderRecentSearches(getRecentSearches());
 
 onRecentClick((term) => {
-  // opcional: preencher o input visualmente
   const inputEl = document.querySelector("#artist-input");
   if (inputEl) inputEl.value = term;
-  // reexecuta a busca
   handleSearch(term);
+});
+
+onClearRecent(() => {
+  clearRecentSearches();
+  renderRecentSearches(getRecentSearches());
 });
